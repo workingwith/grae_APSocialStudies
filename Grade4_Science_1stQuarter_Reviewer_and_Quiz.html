@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grade 4 Science: 1st Quarter Reviewer and Quiz</title>
+<style>
+  :root{
+    --paper:#F1F8F5;
+    --grid:#D2E5DD;
+    --ink:#14324A;
+    --ink-soft:#4B6579;
+    --sky:#177DA0;   --sky-tint:#DBF0F6;
+    --bug:#C0322B;   --bug-tint:#FBE3DF;
+    --leaf:#26824A;  --leaf-tint:#DEF2E3;
+    --sun:#F6BE3A;   --sun-tint:#FFF1C4;
+    --white:#FFFFFF;
+    --display:"Rockwell","Rockwell Nova","Roboto Slab","Museo Slab",Georgia,serif;
+    --body:"Trebuchet MS","Segoe UI",Verdana,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.55;
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:28px 28px;
+  }
+  .sheet{
+    max-width:980px; margin:24px auto 48px; background:var(--white);
+    border:2px solid var(--ink); border-radius:6px;
+  }
+  /* ---------- Header ---------- */
+  .masthead{
+    display:flex; flex-wrap:wrap; gap:18px 28px; align-items:flex-end; justify-content:space-between;
+    padding:26px 32px 18px;
+  }
+  .brand{display:flex; gap:16px; align-items:center}
+  .brand svg{flex:none}
+  h1{font-family:var(--display); font-size:2.15rem; line-height:1.1; margin:0; letter-spacing:-.01em}
+  .subtitle{margin:6px 0 0; color:var(--ink-soft); font-size:1rem}
+  .namefield{display:flex; flex-direction:column; gap:4px; min-width:250px}
+  .namefield label{font-weight:700; font-size:.95rem}
+  .namefield input{
+    font:inherit; font-size:1.1rem; padding:8px 10px; color:var(--ink);
+    border:0; border-bottom:3px solid var(--ink); background:var(--sun-tint); border-radius:4px 4px 0 0;
+  }
+  .namefield input:focus-visible{outline:3px solid var(--sky); outline-offset:2px}
+  .printline{display:none}
+
+  /* ---------- Tabs ---------- */
+  .tabs{display:flex; gap:6px; padding:0 32px; border-bottom:2px solid var(--ink)}
+  .tab{
+    font:inherit; font-family:var(--display); font-weight:700; font-size:1.1rem; cursor:pointer;
+    padding:10px 22px 9px; color:var(--ink); background:var(--sky-tint);
+    border:2px solid var(--ink); border-bottom:0; border-radius:12px 12px 0 0; margin-bottom:-2px;
+  }
+  .tab[aria-selected="false"]{background:#E8EFEC; color:var(--ink-soft)}
+  .tab[aria-selected="true"]{background:var(--white); padding-bottom:11px}
+  .tab:focus-visible{outline:3px solid var(--sky); outline-offset:2px}
+  .panel{padding:28px 32px 36px}
+  .panel[hidden]{display:none}
+
+  /* ---------- Shared bits ---------- */
+  h2,h3,h4{font-family:var(--display); line-height:1.2}
+  .extra{
+    display:inline-block; font-family:var(--body); font-size:.72rem; font-weight:700; vertical-align:middle;
+    background:var(--sun); color:var(--ink); padding:1px 7px; border-radius:20px; margin-left:6px;
+  }
+  .note{background:var(--sun-tint); border-left:6px solid var(--sun); padding:10px 14px; margin:0 0 22px; font-size:.97rem}
+  .jump{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 26px}
+  .jump a{
+    text-decoration:none; color:var(--white); font-weight:700; padding:8px 16px; border-radius:30px;
+    background:var(--c); border:2px solid var(--ink);
+  }
+  .jump a:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+  .p1,.ch1{--c:var(--sky); --t:var(--sky-tint)}
+  .p2,.ch2{--c:var(--bug); --t:var(--bug-tint)}
+  .p3,.ch3{--c:var(--leaf); --t:var(--leaf-tint)}
+  .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 20px}
+  button.btn{
+    font:inherit; font-weight:700; cursor:pointer; padding:10px 20px; border-radius:8px;
+    color:var(--white); background:var(--ink); border:2px solid var(--ink);
+  }
+  button.btn.alt{background:var(--white); color:var(--ink)}
+  button.btn:disabled{opacity:.45; cursor:not-allowed}
+  button.btn:focus-visible{outline:3px solid var(--sky); outline-offset:2px}
+
+  /* ---------- Reviewer ---------- */
+  .chapter{margin:0 0 46px}
+  .chapter > h2{
+    margin:0 0 16px; padding:12px 18px; background:var(--c); color:var(--white);
+    font-size:1.55rem; border-radius:6px; border:2px solid var(--ink);
+  }
+  .chapter h3{font-size:1.25rem; color:var(--c); margin:26px 0 8px; padding-bottom:4px; border-bottom:3px dotted var(--c)}
+  .bigidea{font-size:1.06rem; margin:0 0 6px}
+  .terms{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px; margin:12px 0}
+  .tag{
+    position:relative; padding:12px 14px 12px 40px; background:var(--t);
+    border:2px solid var(--c); border-radius:4px 16px 16px 4px;
+  }
+  .tag::before{
+    content:""; position:absolute; left:12px; top:16px; width:13px; height:13px; border-radius:50%;
+    background:var(--white); border:2px solid var(--c);
+  }
+  .tag b{display:block; font-family:var(--display); font-size:1.08rem; color:var(--ink)}
+  ul.facts{list-style:none; margin:8px 0; padding:0}
+  ul.facts li{position:relative; padding-left:26px; margin:7px 0}
+  ul.facts li::before{
+    content:""; position:absolute; left:4px; top:.55em; width:10px; height:10px; background:var(--c); transform:rotate(45deg);
+  }
+  .remember{
+    margin:16px 0; padding:12px 16px; font-weight:700;
+    background:linear-gradient(transparent 0, transparent 0), var(--sun-tint);
+    border:2px solid var(--ink); border-left:10px solid var(--sun); border-radius:4px;
+  }
+  .watch{
+    margin:16px 0; padding:12px 16px; background:var(--white);
+    border:2px dashed var(--c); border-radius:8px;
+  }
+  .twocol{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:12px 0}
+  .twocol > div{padding:10px 14px; border:2px solid var(--ink); border-radius:6px}
+  .twocol h4{margin:0 0 4px; font-size:1.05rem}
+  .twocol .good{background:var(--leaf-tint)}
+  .twocol .bad{background:var(--bug-tint)}
+  figure{margin:16px 0; padding:14px; border:2px solid var(--c); border-radius:8px; background:var(--white)}
+  figure svg{width:100%; height:auto; display:block; max-width:420px; margin:0 auto}
+  figure .pair{display:flex; flex-wrap:wrap; gap:14px; justify-content:center}
+  figure .pair > div{flex:1 1 300px; min-width:0}
+  figcaption{font-size:.93rem; color:var(--ink-soft); text-align:center; margin-top:6px}
+  .flow{list-style:none; display:flex; flex-wrap:wrap; gap:10px 0; margin:10px 0; padding:0; align-items:center}
+  .flow li{
+    background:var(--t); border:2px solid var(--c); border-radius:30px; padding:5px 16px; font-weight:700; position:relative;
+  }
+  .flow li + li{margin-left:34px}
+  .flow li + li::before{
+    content:"\2192"; position:absolute; left:-30px; top:50%; transform:translateY(-52%); font-size:1.3rem; color:var(--ink);
+  }
+  .flowlabel{margin:14px 0 2px; font-weight:700}
+  table.compare{border-collapse:collapse; width:100%; margin:12px 0; font-size:.98rem}
+  table.compare th, table.compare td{border:2px solid var(--ink); padding:8px 10px; text-align:left; vertical-align:top}
+  table.compare th{background:var(--c); color:var(--white); font-family:var(--display)}
+  table.compare tbody th{background:var(--t); color:var(--ink)}
+  .tablewrap{overflow-x:auto}
+
+  /* SVG classes */
+  .s-body{fill:var(--bug-tint); stroke:var(--ink); stroke-width:3}
+  .s-body2{fill:var(--sun-tint); stroke:var(--ink); stroke-width:3}
+  .s-line{fill:none; stroke:var(--ink); stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round}
+  .s-thin{fill:none; stroke:var(--ink); stroke-width:2.2; stroke-linecap:round}
+  .s-txt{fill:var(--ink); font-family:"Trebuchet MS","Segoe UI",Verdana,sans-serif; font-size:14px; font-weight:700}
+  .s-petal{fill:#F5B1C6; stroke:var(--ink); stroke-width:3}
+  .s-leaf{fill:var(--leaf); stroke:var(--ink); stroke-width:3}
+  .s-green{fill:var(--leaf-tint); stroke:var(--ink); stroke-width:3}
+  .s-sun{fill:var(--sun); stroke:var(--ink); stroke-width:3}
+  .s-stem{fill:var(--leaf); stroke:var(--ink); stroke-width:3}
+
+  /* ---------- Quiz ---------- */
+  .quizintro{margin:0 0 20px}
+  .part{margin:0 0 40px}
+  .part > h3{
+    margin:0 0 14px; padding:11px 18px; background:var(--c); color:var(--white); font-size:1.4rem;
+    border:2px solid var(--ink); border-radius:6px;
+  }
+  .part h4{margin:24px 0 8px; font-size:1.08rem; color:var(--c)}
+  fieldset.q, .sa{
+    border:0; margin:0 0 20px; padding:0 0 4px; min-width:0;
+  }
+  fieldset.q legend, .sa .stem{
+    font-weight:700; font-size:1.05rem; padding:0; margin-bottom:8px; display:block;
+  }
+  .num{
+    display:inline-block; min-width:2.1em; text-align:center; margin-right:8px; padding:0 6px;
+    font-family:var(--display); color:var(--white); background:var(--c); border-radius:20px;
+  }
+  .opts{display:grid; gap:8px}
+  .opt{
+    display:flex; align-items:flex-start; gap:10px; padding:9px 12px; cursor:pointer;
+    border:2px solid #B7CBC4; border-radius:8px; background:var(--white);
+  }
+  .opt input{margin-top:.32em; accent-color:var(--ink); width:1.1em; height:1.1em; flex:none}
+  .opt:hover{border-color:var(--c)}
+  .opt:has(input:checked){border-color:var(--ink); background:var(--sky-tint)}
+  .opt:has(input:focus-visible){outline:3px solid var(--sky); outline-offset:2px}
+  .opt.is-correct{border-color:var(--leaf); background:var(--leaf-tint)}
+  .opt.is-wrong{border-color:var(--bug); background:var(--bug-tint)}
+  .opt .mark{margin-left:auto; font-weight:700; white-space:nowrap}
+  .feedback{margin:8px 0 0; padding:8px 12px; border-radius:6px; font-size:.97rem}
+  .feedback.ok{background:var(--leaf-tint); border-left:6px solid var(--leaf)}
+  .feedback.no{background:var(--bug-tint); border-left:6px solid var(--bug)}
+  .feedback.skip{background:var(--sun-tint); border-left:6px solid var(--sun)}
+  textarea{
+    width:100%; min-height:88px; font:inherit; font-size:1.02rem; color:var(--ink); padding:10px 12px; resize:vertical;
+    border:2px solid #B7CBC4; border-radius:8px;
+    background:repeating-linear-gradient(transparent 0, transparent 27px, #DCE8E3 27px, #DCE8E3 28px);
+    line-height:28px;
+  }
+  textarea:focus-visible{outline:3px solid var(--sky); outline-offset:2px}
+  .suggest{margin:8px 0 0; padding:10px 14px; background:var(--sun-tint); border:2px solid var(--ink); border-radius:8px}
+  .suggest[hidden]{display:none}
+  .suggest b{font-family:var(--display)}
+  .suggest .src{display:block; margin-top:4px; font-size:.88rem; color:var(--ink-soft)}
+  .suggest label{display:flex; gap:8px; align-items:center; margin-top:8px; font-weight:700; cursor:pointer}
+  .suggest input{width:1.15em; height:1.15em; accent-color:var(--leaf)}
+  .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+
+  #results{
+    margin:0 0 30px; padding:20px 22px; border:3px solid var(--ink); border-radius:8px; background:var(--sun-tint);
+  }
+  #results[hidden]{display:none}
+  #results h3{margin:0 0 4px; font-size:1.5rem}
+  .stamp{animation:stamp .35s ease-out both}
+  @keyframes stamp{from{transform:scale(1.25); opacity:0} to{transform:scale(1); opacity:1}}
+  .bigscore{font-family:var(--display); font-size:2.6rem; line-height:1.1; margin:6px 0}
+  .rows{display:grid; gap:10px; margin:14px 0}
+  .row{display:grid; grid-template-columns:minmax(150px,230px) 1fr auto; gap:12px; align-items:center}
+  .bar{height:16px; background:var(--white); border:2px solid var(--ink); border-radius:10px; overflow:hidden}
+  .bar > span{display:block; height:100%; background:var(--c)}
+  .row b{white-space:nowrap}
+  .fine{font-size:.92rem; color:var(--ink-soft); margin:8px 0 0}
+
+  footer{padding:14px 32px 22px; border-top:2px solid var(--ink); font-size:.9rem; color:var(--ink-soft)}
+
+  @media (max-width:640px){
+    body{font-size:16px}
+    .sheet{margin:0; border-radius:0; border-left:0; border-right:0}
+    .masthead,.panel,footer{padding-left:16px; padding-right:16px}
+    .tabs{padding:0 16px}
+    .tab{padding:9px 14px}
+    h1{font-size:1.6rem}
+    .twocol{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr auto}
+    .row .bar{grid-column:1 / -1; order:3}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .stamp{animation:none}
+  }
+
+  /* ---------- Print ---------- */
+  @media print{
+    @page{margin:14mm}
+    body{background:#fff; font-size:12pt; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .sheet{border:0; margin:0; max-width:none}
+    .tabs,.toolbar,.actions,.jump,footer .screenonly{display:none !important}
+    .masthead{padding:0 0 8px}
+    .panel{padding:8px 0 0}
+    .namefield input{background:transparent; border-bottom:2px solid #000; font-size:12pt}
+    .printline{display:block; margin:0 0 10px; font-size:11pt}
+    .chapter > h2, .part > h3, .jump a, table.compare th, .num, .bar > span{
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+    .chapter,.part{break-before:page}
+    .chapter:first-of-type,.part:first-of-type{break-before:auto}
+    .tag,figure,fieldset.q,.sa,.twocol > div,table.compare tr,.remember,.watch{break-inside:avoid}
+    h2,h3,h4{break-after:avoid}
+    .opt{border:1px solid #777; padding:5px 10px}
+    textarea{border:1px solid #777; min-height:100px}
+    #results{background:#fff}
+    footer{border-top:1px solid #777; padding:8px 0 0}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="brand">
+      <svg width="74" height="74" viewBox="0 0 74 74" role="img" aria-label="A ladybug sitting on a green leaf">
+        <path d="M6 58 C4 24 30 6 68 8 C70 44 46 66 6 58Z" fill="#26824A" stroke="#14324A" stroke-width="3"/>
+        <path d="M10 56 C28 42 44 30 60 14" fill="none" stroke="#14324A" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="40" cy="38" r="13" fill="#C0322B" stroke="#14324A" stroke-width="3"/>
+        <path d="M40 25 V51" stroke="#14324A" stroke-width="2.5"/>
+        <circle cx="34" cy="34" r="2.4" fill="#14324A"/><circle cx="46" cy="34" r="2.4" fill="#14324A"/>
+        <circle cx="34" cy="43" r="2.4" fill="#14324A"/><circle cx="46" cy="43" r="2.4" fill="#14324A"/>
+        <circle cx="40" cy="23" r="6" fill="#14324A"/>
+      </svg>
+      <div>
+        <h1>Science 4 Field Notebook</h1>
+        <p class="subtitle">1st Quarter reviewer and quiz: Living Things, Insects and Spiders, Plants</p>
+      </div>
+    </div>
+    <div class="namefield">
+      <label for="studentName">Student name</label>
+      <input id="studentName" type="text" autocomplete="off" placeholder="Type your name here">
+    </div>
+  </header>
+  <p class="printline">Date: ______________________ &nbsp;&nbsp; Score: ______ / 45</p>
+
+  <div class="tabs" role="tablist" aria-label="Reviewer or quiz">
+    <button class="tab" role="tab" id="tab-reviewer" aria-controls="panel-reviewer" aria-selected="true">Reviewer</button>
+    <button class="tab" role="tab" id="tab-quiz" aria-controls="panel-quiz" aria-selected="false" tabindex="-1">Take the Quiz</button>
+  </div>
+
+  <!-- =========================== REVIEWER =========================== -->
+  <main>
+  <section class="panel" id="panel-reviewer" role="tabpanel" aria-labelledby="tab-reviewer">
+
+    <div class="toolbar"><button class="btn alt" type="button" data-print>Print this page</button></div>
+
+    <p class="note">Everything below comes from the school's Science 4 Quizzes #1 to #5. A yellow <span class="extra">extra</span> tag marks a standard Grade 4 fact that was added to fill in the picture and was not on a school quiz.</p>
+
+    <nav class="jump" aria-label="Jump to a chapter">
+      <a class="ch1" href="#ch1">Chapter 1: Living Things</a>
+      <a class="ch2" href="#ch2">Chapter 2: Insects and Spiders</a>
+      <a class="ch3" href="#ch3">Chapter 3: Plants</a>
+    </nav>
+
+    <!-- ---------- CHAPTER 1 ---------- -->
+    <article class="chapter ch1" id="ch1">
+      <h2>Chapter 1: Living Things</h2>
+      <p class="bigidea">Living things and non-living things share an ecosystem. Every organism has needs, and it can adapt to keep surviving when things change.</p>
+
+      <h3>Key terms</h3>
+      <div class="terms">
+        <div class="tag"><b>Ecosystem</b>All the living things and non-living things in one area.</div>
+        <div class="tag"><b>Needs</b>The things every organism requires so it can survive. <span class="extra">extra</span> Food, water, air, and shelter are examples.</div>
+        <div class="tag"><b>Migration</b>Moving to another place to find better food sources and breeding grounds.</div>
+        <div class="tag"><b>Adaptation</b>A change that helps an animal survive and reproduce when its ecosystem changes.</div>
+        <div class="tag"><b>Mimicry</b>Looking like another living thing.</div>
+        <div class="tag"><b>Predator</b>An animal that hunts other animals for food. <span class="extra">extra</span></div>
+        <div class="tag"><b>Resources</b>The wonderful things in God's world that we enjoy and use. It is our job to use them wisely.</div>
+      </div>
+
+      <div class="watch"><b>Watch out:</b> The word is <b>ecosystem</b>, not ecology. <span class="extra">extra</span> Ecology is the study of ecosystems.</div>
+
+      <h3>How animals live in an ecosystem</h3>
+      <ul class="facts">
+        <li>Animals work together by <b>forming groups to hunt or protect each other</b>.</li>
+        <li>Some animals <b>migrate</b> to find better food sources and breeding grounds.</li>
+        <li>Animals defend themselves from predators with <b>sharp claws or teeth</b>, or with <b>mimicry</b>.</li>
+        <li>Animals must <b>adapt</b> to changes in their ecosystem so they can <b>survive and reproduce</b>.</li>
+      </ul>
+
+      <h3>Plants and people</h3>
+      <ul class="facts">
+        <li>Plants change an ecosystem for the better by <b>producing oxygen and food</b>.</li>
+      </ul>
+      <div class="twocol">
+        <div class="bad"><h4>People can hurt an ecosystem by</h4>Polluting rivers.</div>
+        <div class="good"><h4>People can help an ecosystem by</h4>Recycling waste. Conserving water.</div>
+      </div>
+      <p class="remember">God has given us a beautiful world with many wonderful resources to enjoy. It is our job to use those resources wisely.</p>
+    </article>
+
+    <!-- ---------- CHAPTER 2 ---------- -->
+    <article class="chapter ch2" id="ch2">
+      <h2>Chapter 2: Insects and Spiders</h2>
+      <p class="bigidea">Insects and spiders are both small animals with hard outer skeletons, but their bodies are built differently.</p>
+
+      <h3>Key terms</h3>
+      <div class="terms">
+        <div class="tag"><b>Arthropod</b>An invertebrate (an animal with no backbone) with an exoskeleton.</div>
+        <div class="tag"><b>Exoskeleton</b>The hard outer covering of an arthropod. It protects the insect from being eaten.</div>
+        <div class="tag"><b>Molt</b>To shed the old exoskeleton. An arthropod molts as it grows because its exoskeleton does not grow with it.</div>
+        <div class="tag"><b>Antennae</b>Insect body parts used for sensing surroundings.</div>
+        <div class="tag"><b>Mimicry</b>Looking like something dangerous, so predators think the insect is poisonous or tastes bad and leave it alone.</div>
+        <div class="tag"><b>Metamorphosis</b>The big change in body shape an insect goes through as it grows up. It can be incomplete or complete.</div>
+        <div class="tag"><b>Nymph</b>The young insect in incomplete metamorphosis. It looks like a smaller version of the adult.</div>
+        <div class="tag"><b>Pupa</b>The stage in complete metamorphosis that comes between larva and adult.</div>
+        <div class="tag"><b>Social insect</b>An insect that lives in a colony. It cannot survive alone; the colony meets its needs.</div>
+        <div class="tag"><b>Instinct</b>A knowledge or skill an animal is born with.</div>
+        <div class="tag"><b>Cephalothorax</b>The spider body section where the head and thorax are joined together.</div>
+        <div class="tag"><b>Pedipalps</b>Spider body parts used to hold prey.</div>
+        <div class="tag"><b>Spinnerets</b>Parts on the spider's abdomen that make the silk for its web.</div>
+      </div>
+
+      <h3>Arthropods and insect design</h3>
+      <ul class="facts">
+        <li>Arthropods are <b>invertebrates</b>. Insects and spiders are both arthropods. <span class="extra">extra</span></li>
+        <li>An insect has <b>3 body sections</b>: the <b>head</b>, the <b>thorax</b>, and the <b>abdomen</b>.</li>
+        <li>An insect has <b>6 legs</b>. Its <b>antennae</b> sense its surroundings.</li>
+      </ul>
+
+      <figure>
+        <div class="pair">
+          <div>
+            <svg viewBox="0 0 380 210" role="img" aria-label="Diagram of an insect with three body parts and six legs">
+              <path class="s-line" d="M60 84 L44 52 L30 44 M76 82 L74 50 L60 38"/>
+              <path class="s-line" d="M112 80 L98 48 L84 34 M128 80 L128 46 L118 30 M144 80 L156 48 L170 34"/>
+              <path class="s-line" d="M112 120 L98 152 L84 166 M128 120 L128 154 L118 170 M144 120 L156 152 L170 166"/>
+              <ellipse class="s-body" cx="212" cy="100" rx="60" ry="28"/>
+              <ellipse class="s-body" cx="128" cy="100" rx="30" ry="20"/>
+              <circle class="s-body" cx="70" cy="100" r="20"/>
+              <circle cx="64" cy="95" r="3" fill="#14324A"/>
+              <text class="s-txt" x="70" y="196" text-anchor="middle">head</text>
+              <text class="s-txt" x="128" y="196" text-anchor="middle">thorax</text>
+              <text class="s-txt" x="212" y="196" text-anchor="middle">abdomen</text>
+              <text class="s-txt" x="6" y="26">antennae</text>
+            </svg>
+          </div>
+          <div>
+            <svg viewBox="0 0 380 210" role="img" aria-label="Diagram of a spider with two body parts and eight legs">
+              <path class="s-line" d="M78 78 L52 48 L30 40 M92 74 L74 36 L58 20 M112 74 L120 36 L134 20 M126 78 L150 44 L170 38"/>
+              <path class="s-line" d="M78 122 L52 152 L30 160 M92 126 L74 164 L58 180 M112 126 L120 164 L134 180 M126 122 L150 156 L170 162"/>
+              <path class="s-line" d="M68 92 L48 90 M68 108 L48 110"/>
+              <ellipse class="s-body2" cx="204" cy="100" rx="56" ry="42"/>
+              <ellipse class="s-body2" cx="108" cy="100" rx="42" ry="28"/>
+              <circle cx="260" cy="100" r="5" fill="#C0322B" stroke="#14324A" stroke-width="2"/>
+              <text class="s-txt" x="108" y="204" text-anchor="middle">cephalothorax</text>
+              <text class="s-txt" x="204" y="168" text-anchor="middle">abdomen</text>
+              <text class="s-txt" x="272" y="104">spinnerets</text>
+              <text class="s-txt" x="0" y="134">pedipalps</text>
+            </svg>
+          </div>
+        </div>
+        <figcaption>Insect: 3 body parts, 6 legs, antennae. Spider: 2 body parts, 8 legs, no antennae.</figcaption>
+      </figure>
+
+      <h3>How insects protect themselves</h3>
+      <ul class="facts">
+        <li><b>Exoskeleton</b>: a hard covering that protects the insect from being eaten.</li>
+        <li><b>Camouflage</b>: blending in with the surroundings.</li>
+        <li><b>Mimicry</b>: looking dangerous, so predators think it is poisonous or tastes bad.</li>
+        <li><b>Speed</b>: a fly zips away when you try to swat it.</li>
+        <li><b>Stinging</b> or biting attackers.</li>
+      </ul>
+      <p class="watch">Having <b>soft, squishy skin</b> is <b>not</b> a way insects protect themselves.</p>
+
+      <h3>Ways insects eat</h3>
+      <ul class="facts">
+        <li><b>Chewing insects</b> that eat plants by grinding have <b>strong jaws</b>.</li>
+        <li><b>Sucking insects</b> have mouthparts almost like small beaks.</li>
+      </ul>
+
+      <h3>Insect life cycles</h3>
+      <p class="flowlabel">Incomplete metamorphosis (example: grasshopper)</p>
+      <ol class="flow"><li>Egg</li><li>Nymph</li><li>Adult</li></ol>
+      <p class="fine">The nymph looks like a smaller version of the adult. There is no pupa stage.</p>
+      <p class="flowlabel">Complete metamorphosis (example: butterfly)</p>
+      <ol class="flow"><li>Egg</li><li>Larva</li><li>Pupa</li><li>Adult</li></ol>
+      <p class="fine">Only complete metamorphosis has a pupa stage. The larva looks very different from the adult, like a worm or caterpillar. <span class="extra">extra</span></p>
+
+      <h3>Social insects</h3>
+      <ul class="facts">
+        <li>A social insect cannot survive alone. Its colony meets its needs.</li>
+        <li><b>Honeybee colony</b>: the queen lays eggs. <b>Worker bees gather food and take care of the young.</b></li>
+        <li><b>Ant colony</b>: the <b>queen ant's main job is to lay eggs</b>.</li>
+        <li>An <b>instinct</b> is a knowledge or skill an animal is born with.</li>
+      </ul>
+      <div class="watch"><b>Watch out:</b> On Quiz 3, the statement "The Bible uses the bee as an example of being wise" was <b>false</b>. The Bible points to the <b>ant</b> as wise (Proverbs 6:6). <span class="extra">extra</span></div>
+
+      <h3>Spiders</h3>
+      <ul class="facts">
+        <li>A spider has <b>8 legs</b> and <b>2 main body parts</b>: the <b>cephalothorax</b> and the abdomen.</li>
+        <li><b>Pedipalps</b> hold prey. <b>Spinnerets</b> on the abdomen make silk.</li>
+        <li>Most spiders eat <b>small insects and other small animals</b>.</li>
+      </ul>
+      <div class="tablewrap">
+      <table class="compare">
+        <thead><tr><th scope="col"></th><th scope="col">Insects</th><th scope="col">Spiders</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Legs</th><td>6</td><td>8</td></tr>
+          <tr><th scope="row">Main body parts</th><td>3: head, thorax, abdomen</td><td>2: cephalothorax, abdomen</td></tr>
+          <tr><th scope="row">Antennae</th><td>Yes</td><td>No <span class="extra">extra</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Spider instincts</h3>
+      <ul class="facts">
+        <li><b>Spinning webs</b>: silk looks fragile but is quite strong, stronger than most man-made fibers.</li>
+        <li><b>Trapping</b>: the trapdoor spider waits under a hidden door, then jumps out to grab an insect that comes near.</li>
+        <li><b>Fishing and hunting</b>: fishing spiders catch prey near water. Tarantulas hunt on land.</li>
+        <li><b>Poisoning</b>: sometimes a spider bites a person, but the poison of most spiders is not harmful to people.</li>
+      </ul>
+      <div class="watch"><b>Watch out:</b> Quiz 4 said the brown tarantula and the black widow are both dangerous, and the answer was <b>false</b>. The dangerous spiders are the <b>black widow</b> and the <b>brown recluse</b>. Tarantulas are not among them. <span class="extra">extra</span></div>
+    </article>
+
+    <!-- ---------- CHAPTER 3 ---------- -->
+    <article class="chapter ch3" id="ch3">
+      <h2>Chapter 3: Plants</h2>
+      <p class="bigidea">Flowers make seeds, seeds grow into new plants, and some plants can also start new plants without seeds.</p>
+
+      <h3>Key terms</h3>
+      <div class="terms">
+        <div class="tag"><b>Stamen</b>The flower part that produces pollen.</div>
+        <div class="tag"><b>Pistil</b>The flower part that receives pollen.</div>
+        <div class="tag"><b>Petals</b>The colorful flower parts. Their main job is to attract pollinators.</div>
+        <div class="tag"><b>Pollination</b>The movement of pollen to the pistil.</div>
+        <div class="tag"><b>Pollinator</b>An animal, such as an insect, that carries pollen from flower to flower. <span class="extra">extra</span></div>
+        <div class="tag"><b>Seed coat</b>The part of a seed that protects the young plant inside.</div>
+        <div class="tag"><b>Germination</b>When a seed begins to grow into a plant.</div>
+        <div class="tag"><b>Runner</b>A stem that grows along the ground and can start a new plant. A strawberry plant uses runners.</div>
+        <div class="tag"><b>Tuber</b>The underground part of a potato that can grow into a new plant.</div>
+      </div>
+
+      <h3>Flower parts and pollination</h3>
+      <figure>
+        <svg viewBox="0 0 480 320" role="img" aria-label="Diagram of a flower with petals, stamens, and a pistil">
+          <path class="s-petal" d="M210 190 C133 190 83 120 93 60 C153 70 203 120 210 190Z"/>
+          <path class="s-petal" d="M210 190 C287 190 337 120 327 60 C267 70 217 120 210 190Z"/>
+          <rect class="s-stem" x="205" y="186" width="10" height="134" rx="4"/>
+          <path class="s-leaf" d="M215 270 C255 256 285 262 300 286 C262 296 228 292 215 270Z"/>
+          <path class="s-line" d="M203 186 C183 150 168 120 161 98"/>
+          <path class="s-line" d="M217 186 C237 150 252 120 259 98"/>
+          <ellipse class="s-sun" cx="160" cy="90" rx="8" ry="13"/>
+          <ellipse class="s-sun" cx="260" cy="90" rx="8" ry="13"/>
+          <path class="s-line" d="M210 170 L210 92"/>
+          <ellipse class="s-green" cx="210" cy="180" rx="15" ry="20"/>
+          <circle class="s-sun" cx="210" cy="82" r="10"/>
+          <path class="s-thin" d="M70 50 L118 92"/>
+          <path class="s-thin" d="M70 142 L152 98"/>
+          <path class="s-thin" d="M340 150 L222 124"/>
+          <text class="s-txt" x="4" y="26">Petal</text>
+          <text class="s-txt" x="4" y="44" style="font-weight:400">attracts pollinators</text>
+          <text class="s-txt" x="4" y="158">Stamen</text>
+          <text class="s-txt" x="4" y="176" style="font-weight:400">makes pollen</text>
+          <text class="s-txt" x="342" y="154">Pistil</text>
+          <text class="s-txt" x="342" y="172" style="font-weight:400">receives pollen</text>
+        </svg>
+        <figcaption>Stamen makes pollen. Pistil receives pollen. Petals attract pollinators.</figcaption>
+      </figure>
+      <ul class="facts">
+        <li><b>Pollination</b> is the movement of pollen to the pistil.</li>
+        <li>Petals attract pollinators such as insects. <span class="extra">extra</span> The insect carries pollen from flower to flower.</li>
+      </ul>
+
+      <h3>Seeds</h3>
+      <ul class="facts">
+        <li>The <b>seed coat</b> protects the young plant inside the seed.</li>
+        <li>A seed also holds stored food for the young plant to use.</li>
+        <li><b>Seed dispersal</b> means seeds travel away from the parent plant. A dandelion's seeds are dispersed by the <b>wind</b>.</li>
+        <li>Seeds can also travel by water or by animals. <span class="extra">extra</span></li>
+      </ul>
+
+      <h3>Plant life cycle</h3>
+      <ol class="flow"><li>Seed</li><li>Germination</li><li>Flowers grow</li><li>An insect pollinates</li><li>Fruit</li></ol>
+      <ul class="facts">
+        <li>A seed usually needs <b>water, air, and suitable warmth</b> to germinate.</li>
+        <li>After germination the young plant grows. Fruit holds new seeds, and the cycle starts again. <span class="extra">extra</span></li>
+      </ul>
+
+      <h3>Reproduction without seeds</h3>
+      <ul class="facts">
+        <li><b>Runners</b>: a strawberry plant sends out runners that grow into new plants.</li>
+        <li><b>Tuber</b>: a potato tuber can grow into a new plant.</li>
+      </ul>
+    </article>
+
+  </section>
+
+  <!-- =========================== QUIZ =========================== -->
+  <section class="panel" id="panel-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+    <p class="quizintro">45 questions in three parts. Each part has 10 multiple choice items and 5 short answer items. Type your name at the top, answer everything, then press <b>Check my answers</b>. Multiple choice is graded for you. A parent or teacher checks the short answers.</p>
+    <p class="note">This quiz is based on the school's Science 4 Quizzes #1 to #5. Some items are worded a little differently, and a few short answers use standard Grade 4 facts (they say so).</p>
+
+    <div class="toolbar"><button class="btn alt" type="button" data-print>Print this page</button></div>
+
+    <div id="results" hidden aria-live="polite"></div>
+    <div id="quizRoot"></div>
+
+    <div class="actions">
+      <button class="btn" type="button" id="checkBtn">Check my answers</button>
+      <button class="btn alt" type="button" id="resetBtn">Start over</button>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    Grade 4 Science, 1st Quarter. Source: school Science 4 Quizzes #1 to #5 (Chapter 1: Living Things, Chapter 2: Insects and Spiders, Chapter 3: Plants). Facts marked extra are standard Grade 4 facts, not from the school quizzes.
+  </footer>
+</div>
+
+<script>
+(function(){
+  /* ---------------- Tabs ---------------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function selectTab(tab){
+    tabs.forEach(function(t){
+      var on = (t === tab);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    window.scrollTo(0, 0);
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ selectTab(t); });
+    t.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        next.focus(); selectTab(next);
+      }
+    });
+  });
+  Array.prototype.slice.call(document.querySelectorAll('[data-print]')).forEach(function(b){
+    b.addEventListener('click', function(){ window.print(); });
+  });
+
+  /* ---------------- Quiz data ---------------- */
+  var PARTS = [
+    {
+      title: 'Chapter 1: Living Things', cls: 'p1',
+      mc: [
+        { q: 'A pond has fish, plants, water, mud, and rocks. Together, all of these living and non-living things make up an ______.',
+          o: ['ecosystem','organism','adaptation','predator'], a: 0,
+          why: 'An ecosystem is all the living and non-living things in one area. (Ecology is the study of ecosystems.)' },
+        { q: 'Every organism requires certain things, like food, water, and air, so that it can survive. These things are called ______.',
+          o: ['wants','needs','habits','migrations'], a: 1,
+          why: 'Needs are the things a living thing must have to survive.' },
+        { q: 'Why do some animals migrate?',
+          o: ['To escape from their families','To find better food sources and breeding grounds','To sleep for a long time','To hide from the sun'], a: 1,
+          why: 'Animals migrate to find better food sources and breeding grounds.' },
+        { q: 'How do animals work together in an ecosystem?',
+          o: ['By forming groups to hunt or protect each other','By competing for every resource','By ignoring each other','By hiding from all other animals'], a: 0,
+          why: 'Working in groups helps animals hunt and protect each other.' },
+        { q: 'Which of these can help an animal defend itself from a predator?',
+          o: ['Sharp claws or teeth','Ignoring the predator','Sleeping for a long time','Leaving its food behind'], a: 0,
+          why: 'Sharp claws or teeth are a way animals defend themselves.' },
+        { q: 'Mimicry is when a living thing ______.',
+          o: ['looks like another living thing','moves to a new place','makes its own food','grows very fast'], a: 0,
+          why: 'Mimicry is looking like another living thing.' },
+        { q: 'Which of these is a negative impact humans can have on an ecosystem?',
+          o: ['Polluting rivers','Recycling waste','Conserving water','Using resources wisely'], a: 0,
+          why: 'Polluting rivers harms the living things that depend on them. Recycling and conserving water help.' },
+        { q: 'God has given us a beautiful world with many wonderful resources. What is our job?',
+          o: ['To use them wisely','To use them up as fast as we can','To keep them all for ourselves','To ignore them'], a: 0,
+          why: 'It is our job to use those resources wisely.' },
+        { q: 'Why is it important for animals to adapt to changes in their ecosystem?',
+          o: ['To survive and reproduce','To grow bigger than other animals','To make more friends','To stop needing food'], a: 0,
+          why: 'Adapting helps animals survive and reproduce when their ecosystem changes.' },
+        { q: 'How do plants help an ecosystem?',
+          o: ['By making noise','By producing oxygen and food','By moving from place to place','By hunting other plants'], a: 1,
+          why: 'Plants produce oxygen and food.' }
+      ],
+      sa: [
+        { q: 'In your own words, what is an ecosystem? Give one example.',
+          a: 'An ecosystem is all the living things and non-living things in one area. Examples: a pond, a forest, a coral reef.' },
+        { q: 'Name two needs that every living thing has.',
+          a: 'Any two: food, water, air, shelter.',
+          n: 'The school quiz says organisms have needs but does not list them, so these examples are standard Grade 4 facts, not from the official quiz.' },
+        { q: 'What is mimicry?',
+          a: 'Mimicry is looking like another living thing.' },
+        { q: 'Give two ways people can help protect an ecosystem.',
+          a: 'Any two: recycle waste, conserve water, do not pollute rivers, use resources wisely.' },
+        { q: 'Give two ways animals can defend themselves from predators.',
+          a: 'Sharp claws or teeth, and mimicry (looking like another living thing).',
+          n: 'Other correct ideas, such as running away or hiding, are also fine.' }
+      ]
+    },
+    {
+      title: 'Chapter 2: Insects and Spiders', cls: 'p2',
+      mc: [
+        { q: 'An insect\'s body has three main sections. What are they?',
+          o: ['head, thorax, abdomen','head, thorax, tail','antennae, thorax, abdomen','head, wings, legs'], a: 0,
+          why: 'The three sections are the head, thorax, and abdomen.' },
+        { q: 'Which part does an insect use to sense its surroundings?',
+          o: ['antennae','stingers','thorax','abdomen'], a: 0,
+          why: 'Antennae sense the insect\'s surroundings.' },
+        { q: 'What does an insect\'s exoskeleton do?',
+          o: ['It protects the insect from being eaten.','It helps the insect change its shape.','It helps the insect grow bigger.','It helps the insect smell food.'], a: 0,
+          why: 'The hard exoskeleton protects the insect from being eaten.' },
+        { q: 'A harmless insect looks like a dangerous one, so predators think it is poisonous or tastes bad. What is this called?',
+          o: ['mimicry','molting','metamorphosis','instinct'], a: 0,
+          why: 'Mimicry makes predators think the insect is poisonous or tastes bad, so they leave it alone.' },
+        { q: 'Which mouthparts do insects that eat plants by grinding have?',
+          o: ['long tongues','piercing mouthparts','strong jaws','small beaks'], a: 2,
+          why: 'Chewing insects that grind plants have strong jaws.' },
+        { q: 'An arthropod\'s exoskeleton does not grow with it. What must the arthropod do as it grows?',
+          o: ['molt','sting','colt','hide'], a: 0,
+          why: 'It molts, which means it sheds the old exoskeleton.' },
+        { q: 'In incomplete metamorphosis, which stage comes right after the egg?',
+          o: ['nymph','larva','pupa','adult'], a: 0,
+          why: 'The order is egg, nymph, adult. The nymph looks like a smaller adult.' },
+        { q: 'What is the main job of worker bees in a honeybee colony?',
+          o: ['To lay eggs','To gather food and take care of the young','To mate with the queen','To rule the colony'], a: 1,
+          why: 'Worker bees gather food and take care of the young. The queen lays the eggs.' },
+        { q: 'Which statement correctly describes a spider?',
+          o: ['6 legs and 3 main body parts','8 legs and 2 main body parts','8 legs and 3 main body parts','6 legs and 2 main body parts'], a: 1,
+          why: 'Spiders have 8 legs and 2 main body parts. Insects have 6 legs and 3.' },
+        { q: 'Where does the silk used to make a spider\'s web come from?',
+          o: ['Spinnerets on the spider\'s abdomen','The spider\'s mouth','The spider\'s legs','The spider\'s pedipalps'], a: 0,
+          why: 'Spiders make silk in spinnerets on their abdomen.' }
+      ],
+      sa: [
+        { q: 'Name three ways insects protect themselves.',
+          a: 'Any three: exoskeleton, camouflage, mimicry, speed, stinging or biting.' },
+        { q: 'How are spiders different from insects?',
+          a: 'Spiders have 8 legs and 2 main body parts (cephalothorax and abdomen). Insects have 6 legs and 3 main body parts (head, thorax, abdomen).' },
+        { q: 'Write the stages of complete metamorphosis in order and name one insect that goes through it.',
+          a: 'Egg, larva, pupa, adult. Example: butterfly.',
+          n: 'Beetles also go through complete metamorphosis.' },
+        { q: 'In a honeybee or ant colony, what is the job of the queen and what is the job of the workers?',
+          a: 'The queen lays eggs. The workers gather food and take care of the young.' },
+        { q: 'How does a trapdoor spider catch its food?',
+          a: 'It waits under a hidden door and jumps out to grab an insect that comes near.' }
+      ]
+    },
+    {
+      title: 'Chapter 3: Plants', cls: 'p3',
+      mc: [
+        { q: 'Which part of a flower produces pollen?',
+          o: ['stamen','pistil','petal','stem'], a: 0,
+          why: 'The stamen produces pollen.' },
+        { q: 'Which part of a flower receives pollen?',
+          o: ['stamen','pistil','petal','root'], a: 1,
+          why: 'The pistil receives pollen.' },
+        { q: 'What is the main job of a flower\'s petals?',
+          o: ['To attract pollinators','To make seeds grow','To absorb water','To protect the roots'], a: 0,
+          why: 'Petals attract pollinators.' },
+        { q: 'What is pollination?',
+          o: ['The growth of a seed into a plant','The spreading of roots in the soil','The movement of pollen to the pistil','The falling of petals'], a: 2,
+          why: 'Pollination is the movement of pollen to the pistil.' },
+        { q: 'Which part of a seed protects the young plant inside?',
+          o: ['root','stored food','seed coat','petal'], a: 2,
+          why: 'The seed coat protects the young plant.' },
+        { q: 'What does a seed usually need to germinate?',
+          o: ['Flowers, fruits, and insects','Rocks, sand, and darkness','Water, air, and suitable warmth','Pollen, petals, and wind'], a: 2,
+          why: 'Seeds usually germinate with water, air, and suitable warmth.' },
+        { q: 'Which plant can reproduce using runners?',
+          o: ['sunflower','coconut','strawberry','dandelion'], a: 2,
+          why: 'A strawberry plant sends out runners that grow into new plants.' },
+        { q: 'Which part of a potato can grow into a new plant?',
+          o: ['tuber','petal','pollen','stamen'], a: 0,
+          why: 'A potato tuber can grow into a new plant without a seed.' },
+        { q: 'Which shows the correct order of the plant life cycle?',
+          o: ['Seed \u2192 Germination \u2192 Flowers grow \u2192 An insect pollinates \u2192 Fruit',
+              'Fruit \u2192 Germination \u2192 Seed \u2192 An insect pollinates \u2192 Flowers grow',
+              'An insect pollinates \u2192 Germination \u2192 Flowers grow \u2192 Seed \u2192 Fruit',
+              'Flowers grow \u2192 Seed \u2192 Fruit \u2192 Germination \u2192 An insect pollinates'], a: 0,
+          why: 'A seed germinates, the plant grows flowers, an insect pollinates, and fruit forms.' },
+        { q: 'Which plant has seeds that can be dispersed by the wind?',
+          o: ['coconut','avocado','dandelion','potato'], a: 2,
+          why: 'Dandelion seeds are light enough to be carried by the wind.' }
+      ],
+      sa: [
+        { q: 'Which flower part produces pollen, and which part receives it?',
+          a: 'The stamen produces pollen. The pistil receives pollen.' },
+        { q: 'What is pollination, and how can an insect help with it?',
+          a: 'Pollination is the movement of pollen to the pistil. An insect visits flowers (attracted by the petals) and carries pollen from flower to flower.',
+          n: 'The insect part goes a little beyond the school quiz. It is a standard Grade 4 fact.' },
+        { q: 'What three things does a seed usually need to germinate?',
+          a: 'Water, air, and suitable warmth.' },
+        { q: 'Name two plants that can reproduce without seeds and tell how each one does it.',
+          a: 'A strawberry plant uses runners. A potato uses its tuber to grow a new plant.' },
+        { q: 'Write the plant life cycle in the correct order.',
+          a: 'Seed, germination, flowers grow, an insect pollinates, fruit.' }
+      ]
+    }
+  ];
+
+  var root = document.getElementById('quizRoot');
+  var results = document.getElementById('results');
+  var checkBtn = document.getElementById('checkBtn');
+  var resetBtn = document.getElementById('resetBtn');
+  var nameInput = document.getElementById('studentName');
+  var checked = false;
+  var mcScores = [0,0,0];
+
+  function shuffle(a){
+    var arr = a.slice();
+    for(var i = arr.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+  function esc(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function render(){
+    checked = false;
+    results.hidden = true; results.innerHTML = '';
+    checkBtn.disabled = false;
+    var n = 0, html = '';
+    PARTS.forEach(function(part, pi){
+      html += '<section class="part ' + part.cls + '"><h3>Part ' + (pi + 1) + ': ' + esc(part.title) + '</h3>';
+      html += '<h4>Multiple choice: pick the best answer</h4>';
+      part.mc.forEach(function(item, qi){
+        n++;
+        var order = shuffle(item.o.map(function(t, i){ return {t: t, ok: i === item.a}; }));
+        html += '<fieldset class="q" id="mc-' + pi + '-' + qi + '"><legend><span class="num">' + n + '</span>' + esc(item.q) + '</legend><div class="opts">';
+        order.forEach(function(opt){
+          html += '<label class="opt"><input type="radio" name="mc-' + pi + '-' + qi + '" data-correct="' + (opt.ok ? 1 : 0) + '"><span>' + esc(opt.t) + '</span></label>';
+        });
+        html += '</div><div class="feedback" hidden></div></fieldset>';
+      });
+      html += '<h4>Short answer: write your answer in a sentence or two</h4>';
+      part.sa.forEach(function(item, si){
+        n++;
+        html += '<div class="sa" id="sa-' + pi + '-' + si + '"><label class="stem" for="ta-' + pi + '-' + si + '"><span class="num">' + n + '</span>' + esc(item.q) + '</label>';
+        html += '<textarea id="ta-' + pi + '-' + si + '" rows="3"></textarea>';
+        html += '<div class="suggest" hidden><b>Suggested answer:</b> ' + esc(item.a);
+        if(item.n){ html += '<span class="src">' + esc(item.n) + '</span>'; }
+        html += '<label><input type="checkbox" class="mark-sa" data-part="' + pi + '"> Parent or teacher: this answer is correct</label></div></div>';
+      });
+      html += '</section>';
+    });
+    root.innerHTML = html;
+  }
+
+  function saMarked(pi){
+    return document.querySelectorAll('.mark-sa[data-part="' + pi + '"]:checked').length;
+  }
+
+  function buildResults(unanswered){
+    var totalMC = mcScores[0] + mcScores[1] + mcScores[2];
+    var totalSA = saMarked(0) + saMarked(1) + saMarked(2);
+    var pct = Math.round(totalMC / 30 * 100);
+    var msg = pct >= 90 ? 'Outstanding! You really know your science.'
+            : pct >= 75 ? 'Great job! Look at the missed items and try them again.'
+            : pct >= 50 ? 'Good effort. Read the Reviewer again, then try the quiz once more.'
+            : 'Keep going! Read the Reviewer, then press Start over and try again.';
+    var name = nameInput.value.trim();
+    var h = '<h3 class="stamp"></h3>';
+    h += '<div class="bigscore" id="bigscore"></div>';
+    h += '<p>' + esc(msg) + '</p>';
+    if(unanswered){ h += '<p class="fine">' + unanswered + ' multiple choice item' + (unanswered === 1 ? ' was' : 's were') + ' left blank and counted as missed.</p>'; }
+    h += '<div class="rows">';
+    PARTS.forEach(function(part, pi){
+      h += '<div class="row ' + part.cls + '"><span>' + esc(part.title) + '</span><div class="bar"><span id="bar-' + pi + '" style="width:' + (mcScores[pi] * 10) + '%"></span></div><b>' + mcScores[pi] + ' / 10</b></div>';
+    });
+    h += '</div>';
+    h += '<p><b>Short answers:</b> read each suggested answer below your writing. A parent or teacher ticks the box when the answer is right. Short answer score: <b id="saScore">' + totalSA + ' / 15</b></p>';
+    h += '<p class="fine">Total with short answers so far: <b id="grandScore">' + (totalMC + totalSA) + ' / 45</b></p>';
+    results.innerHTML = h;
+    results.querySelector('h3').textContent = name ? 'Quiz checked, ' + name + '!' : 'Quiz checked!';
+    document.getElementById('bigscore').textContent = 'Multiple choice: ' + totalMC + ' / 30';
+  }
+
+  function refreshSA(){
+    if(!checked) return;
+    var t = saMarked(0) + saMarked(1) + saMarked(2);
+    var totalMC = mcScores[0] + mcScores[1] + mcScores[2];
+    document.getElementById('saScore').textContent = t + ' / 15';
+    document.getElementById('grandScore').textContent = (totalMC + t) + ' / 45';
+  }
+
+  function check(){
+    if(checked) return;
+    checked = true;
+    var unanswered = 0;
+    PARTS.forEach(function(part, pi){
+      var s = 0;
+      part.mc.forEach(function(item, qi){
+        var block = document.getElementById('mc-' + pi + '-' + qi);
+        var inputs = Array.prototype.slice.call(block.querySelectorAll('input'));
+        var chosen = inputs.filter(function(i){ return i.checked; })[0];
+        var correctLabelText = '';
+        inputs.forEach(function(i){
+          var lab = i.closest('label');
+          i.disabled = true;
+          if(i.dataset.correct === '1'){
+            lab.classList.add('is-correct');
+            correctLabelText = lab.querySelector('span').textContent;
+            lab.insertAdjacentHTML('beforeend', '<span class="mark">\u2713 correct answer</span>');
+          } else if(i === chosen){
+            lab.classList.add('is-wrong');
+            lab.insertAdjacentHTML('beforeend', '<span class="mark">\u2717 your answer</span>');
+          }
+        });
+        var fb = block.querySelector('.feedback');
+        fb.hidden = false;
+        if(chosen && chosen.dataset.correct === '1'){
+          s++;
+          fb.className = 'feedback ok';
+          fb.textContent = 'Correct! ' + item.why;
+        } else if(!chosen){
+          unanswered++;
+          fb.className = 'feedback skip';
+          fb.textContent = 'Not answered. ' + item.why;
+        } else {
+          fb.className = 'feedback no';
+          fb.textContent = 'Not quite. ' + item.why;
+        }
+      });
+      mcScores[pi] = s;
+      part.sa.forEach(function(item, si){
+        var box = document.getElementById('sa-' + pi + '-' + si);
+        box.querySelector('.suggest').hidden = false;
+        box.querySelector('textarea').readOnly = true;
+      });
+    });
+    buildResults(unanswered);
+    results.hidden = false;
+    checkBtn.disabled = true;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    results.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+  }
+
+  document.addEventListener('change', function(e){
+    if(e.target.classList && e.target.classList.contains('mark-sa')){ refreshSA(); }
+  });
+  checkBtn.addEventListener('click', check);
+  resetBtn.addEventListener('click', function(){
+    render();
+    window.scrollTo(0, 0);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
